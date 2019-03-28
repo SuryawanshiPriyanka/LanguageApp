@@ -161,7 +161,7 @@ public class DataBaseClass extends SQLiteOpenHelper {
         open();
         Cursor c = db.query(TABLE_LANGUAGE_DETAILS + " ORDER BY RANDOM() LIMIT 1",
                 null, null, null, null, null, null);
-/**/z
+/**/
         if (c != null)
         {
             if (c.getCount() > 0)
