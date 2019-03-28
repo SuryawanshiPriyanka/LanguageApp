@@ -67,7 +67,7 @@ public class DataBaseClass extends SQLiteOpenHelper {
 
     }
 
-  /*  public long sentence(String sentence)
+    public long sentence(String sentence)
     {
         open();
 
@@ -77,7 +77,8 @@ public class DataBaseClass extends SQLiteOpenHelper {
         long l = db.insert(TABLE_LANGUAGE_DETAILS, null, values);
         db.close();
         return l;
-    }*/
+    }
+
     public long order(String s_id, String order_id, String word) {
         open();
         ContentValues values1 = new ContentValues();
@@ -161,7 +162,7 @@ public class DataBaseClass extends SQLiteOpenHelper {
         open();
         Cursor c = db.query(TABLE_LANGUAGE_DETAILS + " ORDER BY RANDOM() LIMIT 1",
                 null, null, null, null, null, null);
-/**/z
+/**/
         if (c != null)
         {
             if (c.getCount() > 0)

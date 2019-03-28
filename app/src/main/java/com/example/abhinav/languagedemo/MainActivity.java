@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_button.setOnClickListener(this);
         db = new DataBaseClass(MainActivity.this);
 
+
     }
     @Override
     public void onClick(View view)
@@ -38,9 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent=new Intent(this,NewClassLanguage.class);
             startActivity(intent);
         }
-        /*if (view.getId()==R.id.btn_button)
+
+        if (view.getId()==R.id.btn_button)
         {
-            long l = db.sentence("Hello World");
+            long l = db.sentence(edt_edittext.getText().toString().trim());
 
             if(l > 0)
             {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Not Inserted", Toast.LENGTH_SHORT).show();
             }
 
-           *//* long l1 = 0 ;
+            long l1 = 0 ;
             String str = " ";
             String arr[] = str.split(" ");
             if(arr.length > 0)
@@ -69,7 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else
             {
                 Toast.makeText(this, "Not Inserted", Toast.LENGTH_SHORT).show();
-            }*//*
-        }*/
+            }
+
+            edt_edittext.setText(" ");
+        }
     }
 }

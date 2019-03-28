@@ -1,6 +1,5 @@
 package com.example.abhinav.languagedemo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +25,6 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
     ImageView imgv_mic ;
     EditText edt_edit1;
 
-
     RecyclerView rec_recyclerView1,rec_recyclerView;
     DataBaseClass db;
     ArrayList<LanguageBean>arrayList;
@@ -41,7 +39,7 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
         getIds();
         initTextToSpeech();
 
-        arrayList = db.getSentenceDetails("3");
+        /*  arrayList = db.getSentenceDetails("3");
 
         if(arrayList.size() > 0)
         {
@@ -50,8 +48,10 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
                 txt_textview.setText(arrayList.get(i).getSentence() + "\n");
             }
         }
-        db.getOrderDetails();
-        txt_textview.setText(db.getRandom());
+        db.getOrderDetails();*/
+
+        String str = db.getRandom() ;
+        txt_textview.setText(str);
 
         if (arrayList.size()>0)
         {
@@ -65,16 +65,7 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
             rec_recyclerView1.setAdapter(customAdapter);
             rec_recyclerView.setAdapter(customAdapter);
         }
-
-        txt_textview=(TextView)findViewById(R.id.txt_textview);
-
-
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-
-
-        txt_textview.setText(name);
-    }
+        }
 
     private void initTextToSpeech()
     {
@@ -137,6 +128,9 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
             textToSpeech.shutdown();
         }
     }
+
+
+
     @Override
     public void onClick(View view)
     {
@@ -171,11 +165,44 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
             {
                 Toast.makeText(this, "Not Inserted", Toast.LENGTH_SHORT).show();
             }*/
-            txt_textview.setText(db.getRandom());
 
+           /* arrayList = db.getSentenceDetails(" ");
+            if(arrayList.size() > 0)
+            {
+                for (int i = 0; i < arrayList.size(); i++)
+                {
+                    txt_textview.setText(arrayList.get(i).getSentence() + "\n");
+                }
+            }*/
 
-            String str = ((EditText)findViewById(R.id.edt_edit1)).getText().toString();
-            boolean correct = "SampleText".equals(str);
+            String originalString ="";
+            String str= "";
+            int len = 0 ;
+
+            originalString = txt_textview.getText().toString().trim();
+            len = originalString.split(" ").length;
+            str = edt_edit1.getText().toString().trim();
+            String arr[]=str.split(" ");
+            if (arr.length > 0)
+            {
+                 int count=0;
+
+                for (int i=0;i<arr.length;i++)
+                {
+                    if (originalString.contains(arr[i]))
+                    {
+                        count++;
+                    }
+                }
+                if (count == len)
+                {
+                    Toast.makeText(this, "Sentence Is Correct", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "Sentence Is Not Correct", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 }
