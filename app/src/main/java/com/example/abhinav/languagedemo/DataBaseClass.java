@@ -58,7 +58,8 @@ public class DataBaseClass extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void open() throws SQLException {
+    public void open() throws SQLException
+    {
         db = getWritableDatabase();
     }
 
@@ -79,7 +80,8 @@ public class DataBaseClass extends SQLiteOpenHelper {
         return l;
     }
 
-    public long order(String s_id, String order_id, String word) {
+    public long order(String s_id, String order_id, String word)
+    {
         open();
         ContentValues values1 = new ContentValues();
 

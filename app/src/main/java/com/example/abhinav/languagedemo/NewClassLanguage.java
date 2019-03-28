@@ -17,22 +17,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class NewClassLanguage extends AppCompatActivity implements View.OnClickListener
-{
+public class NewClassLanguage extends AppCompatActivity implements View.OnClickListener {
     private TextToSpeech textToSpeech;
     TextView txt_textview;
     Button btn_check;
-    ImageView imgv_mic ;
+    ImageView imgv_mic;
     EditText edt_edit1;
 
-    RecyclerView rec_recyclerView1,rec_recyclerView;
+    RecyclerView rec_recyclerView1, rec_recyclerView;
     DataBaseClass db;
-    ArrayList<LanguageBean>arrayList;
+    ArrayList<LanguageBean> arrayList;
     CustomAdapter customAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_class_language);
 
@@ -50,32 +48,27 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
         }
         db.getOrderDetails();*/
 
-        String str = db.getRandom() ;
+        String str = db.getRandom();
         txt_textview.setText(str);
 
-        if (arrayList.size()>0)
-        {
+        if (arrayList.size() > 0) {
             rec_recyclerView1 = (RecyclerView) findViewById(R.id.rec_recyclerView1);
-            rec_recyclerView=(RecyclerView) findViewById(R.id.rec_recyclerView);
+            rec_recyclerView = (RecyclerView) findViewById(R.id.rec_recyclerView);
 
             StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
             rec_recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-            customAdapter =new CustomAdapter(arrayList,NewClassLanguage.this);
+            customAdapter = new CustomAdapter(arrayList, NewClassLanguage.this);
             rec_recyclerView1.setAdapter(customAdapter);
             rec_recyclerView.setAdapter(customAdapter);
         }
-        }
+    }
 
-    private void initTextToSpeech()
-    {
-        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener()
-                {
+    private void initTextToSpeech() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
-            public void onInit(int status)
-            {
-                if (status == TextToSpeech.SUCCESS)
-                {
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
                     int ttsLang = textToSpeech.setLanguage(Locale.US);
 
                     if (ttsLang == TextToSpeech.LANG_MISSING_DATA
@@ -92,32 +85,33 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
         });
 
     }
+
     private void getIds()
     {
         db = new DataBaseClass(NewClassLanguage.this);
-        arrayList=new ArrayList<>();
-        txt_textview=(TextView) findViewById(R.id.txt_textview);
-        btn_check=(Button) findViewById(R.id.btn_check);
+        arrayList = new ArrayList<>();
+        txt_textview = (TextView) findViewById(R.id.txt_textview);
+        btn_check = (Button) findViewById(R.id.btn_check);
         btn_check.setOnClickListener(this);
         imgv_mic = (ImageView) findViewById(R.id.imgv_mic);
-        edt_edit1=(EditText)findViewById(R.id.edt_edit1);
+        edt_edit1 = (EditText) findViewById(R.id.edt_edit1);
         imgv_mic.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
                 String data = txt_textview.getText().toString();
                 Log.i("TTS", "button clicked: " + data);
                 int speechStatus = textToSpeech.speak(data, TextToSpeech.QUEUE_FLUSH, null);
 
-                if (speechStatus == TextToSpeech.ERROR)
-                {
+                if (speechStatus == TextToSpeech.ERROR) {
                     Log.e("TTS", "Error in converting Text to Speech!");
                 }
             }
         });
-
     }
+
     @Override
     protected void onDestroy()
     {
@@ -130,12 +124,9 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
     }
 
 
-
     @Override
-    public void onClick(View view)
-    {
-        if (view.getId()==R.id.btn_check)
-        {
+    public void onClick(View view) {
+        if (view.getId() == R.id.btn_check) {
             //long l = db.sentence("I Love To Eat");
 
             /*if(l > 0)
@@ -174,35 +165,31 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
                     txt_textview.setText(arrayList.get(i).getSentence() + "\n");
                 }
             }*/
+            String originalString = "";
+            String str = "";
 
-            String originalString ="";
-            String str= "";
-            int len = 0 ;
 
-            originalString = txt_textview.getText().toString().trim();
+            int len = 0;
+            originalString = txt_textview.getText().toString().trim().toLowerCase();
             len = originalString.split(" ").length;
-            str = edt_edit1.getText().toString().trim();
-            String arr[]=str.split(" ");
+            str = edt_edit1.getText().toString().trim().toLowerCase();
+            String arr[] = str.split(" ");
             if (arr.length > 0)
             {
-                 int count=0;
+                int count = 0;
 
-                for (int i=0;i<arr.length;i++)
-                {
-                    if (originalString.contains(arr[i]))
-                    {
+                for (int i = 0; i < arr.length; i++) {
+                    if (originalString.contains(arr[i])) {
                         count++;
                     }
                 }
-                if (count == len)
-                {
+                if (count == len) {
                     Toast.makeText(this, "Sentence Is Correct", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(this, "Sentence Is Not Correct", Toast.LENGTH_SHORT).show();
                 }
             }
         }
     }
+
 }

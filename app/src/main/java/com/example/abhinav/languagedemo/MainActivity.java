@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (view.getId()==R.id.btn_button)
         {
-            long l = db.sentence(edt_edittext.getText().toString().trim());
+            long l = db.sentence(edt_edittext.getText().toString().trim().toLowerCase());
 
             if(l > 0)
             {
@@ -53,15 +53,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 Toast.makeText(this, "Not Inserted", Toast.LENGTH_SHORT).show();
             }
-
+/*
             long l1 = 0 ;
-            String str = " ";
+            String str = "";
             String arr[] = str.split(" ");
             if(arr.length > 0)
             {
                 for (int i = 0; i < arr.length ; i++)
                 {
-
                     l1 = db.order(" ", String.valueOf(i + 1), arr[i]);
                 }
             }
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else
             {
                 Toast.makeText(this, "Not Inserted", Toast.LENGTH_SHORT).show();
-            }
+            }*/
 
             edt_edittext.setText(" ");
         }
