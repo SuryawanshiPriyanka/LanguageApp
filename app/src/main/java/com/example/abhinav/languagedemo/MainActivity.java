@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else
             {
-                Toast.makeText(this, "Not Inserted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "failed to insert", Toast.LENGTH_SHORT).show();
             }
 
 
