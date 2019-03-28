@@ -165,6 +165,7 @@ public class NewClassLanguage extends AppCompatActivity implements View.OnClickL
                     txt_textview.setText(arrayList.get(i).getSentence() + "\n");
                 }
             }*/
+
             String originalString = "";
             String str = "";
 
